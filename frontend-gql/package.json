@@ -1,0 +1,34 @@
+{
+  "name": "frontend-gql",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "echo 'starting frontend' && react-scripts start"
+  },
+  "dependencies": {
+    "@apollo/react-hooks": "^3.1.3",
+    "apollo-boost": "^0.4.4",
+    "graphql": "^14.5.8",
+    "react": "^16.12.0",
+    "react-cookies": "^0.1.1",
+    "react-dom": "^16.12.0",
+    "react-google-login": "^5.0.7",
+    "react-modal": "^3.11.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.3.0",
+    "styled-components": "^4.4.1",
+    "styled-system": "^5.1.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

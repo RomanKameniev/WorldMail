@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'SegoiRegular';
+    src: url('./fonts/SegoiRegular/SegoeUI.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/SegoiRegular/SegoeUI.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/SegoiRegular/SegoeUI.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./fonts/SegoiRegular/SegoeUI.woff') format('woff'), /* Pretty Modern Browsers */
+         url('./fonts/SegoiRegular/SegoeUI.ttf')  format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/SegoiRegular/SegoeUI.svg#svgFontName') format('svg'); /* Legacy iOS */
+  }
+@font-face {
+  font-family: 'SegoiBold';
+  src: url('./fonts/SegoiBold/SegoeUI-Bold.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/SegoiBold/SegoeUI-Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/SegoiBold/SegoeUI-Bold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/SegoiBold/SegoeUI-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./fonts/SegoiBold/SegoeUI-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./fonts/SegoiBold/SegoeUI-Bold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+.body{
+    font-family: SegoiRegular, SegoiBold;
+}
