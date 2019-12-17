@@ -11,6 +11,10 @@ import delivery from './assets/deliveries/index';
 import usa from './assets/usa.svg';
 import ua from './assets/ua.svg';
 import googlePlay from './assets/googleplay.svg';
+import man from './assets/man.svg';
+import edit from './assets/edit.svg';
+import remove from './assets/remove.svg';
+import finder from './assets/finder.svg';
+import update from './assets/update.svg';
 
-
-export { bg, logoa, logob, userTemplate, packageImg, Icon1, Icon2, Icon3, Icon4, delivery, usa, ua, googlePlay }
+export { bg, logoa, logob, userTemplate, packageImg, Icon1, Icon2, Icon3, Icon4, delivery, usa, ua, googlePlay, man, edit, remove, finder, update }

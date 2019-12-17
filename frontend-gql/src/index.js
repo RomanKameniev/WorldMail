@@ -8,6 +8,7 @@ import ApolloClient from 'apollo-boost';
 import { gql } from "apollo-boost";
 
 import App from './App';
+require('dotenv').config()
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql',
