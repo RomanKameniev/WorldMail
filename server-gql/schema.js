@@ -1,4 +1,5 @@
 const { ObjectId } = require('mongodb')
+const axios = require('axios');
 
 const prepare = o => {
     if (!o) return o
@@ -12,17 +13,9 @@ const prepare = o => {
 
 const typeDefs = `
 type Query {
-    package(id: ID!): [Package]
-}
-
-type Posts {
-	id: ID!
-	created: Int!
-    title: String!
-	msg: String!
-	tags: [String]
-	kind: Boolean!
-	likes: Int!
+    getPackage(id: ID!): [Package]
+    getMessage: String
+    getUser(id: ID!): User 
 }
 
 type Package {
@@ -30,8 +23,19 @@ type Package {
     data: String
 }
 
+type User {
+    id: ID
+    uuid: String
+    name: String
+    email: String
+    password: String
+}
+
+
 type Mutation {
-	postAdd(title: String!, msg: String!, kind: Boolean!, tags: [String], email: String): Posts
+    setMessage(message: String): String
+    setUserById(uuid: String!): User
+    setUser(id: ID, name: String, email: String, password: String): User
 }
 
 schema {
@@ -56,17 +60,19 @@ const fetchArrayCursor = (c, sel, opts) => new Promise(resolve => {
     })
 })
 
-const data = [{ id: "aasd", data: "aga" }, { id: "2asdad" }]
-const mapPost = (root, { id }) => data.filter(i => id === i.id)// && ({ id, ...post });
 const resolvers = {
 
     Query: {
-        package: async (root, args, context, info) => {
-            //console.log('package => ', root, args, context, info)
-            let res = data.filter(i => i.id == args.id)
-            console.log("res", res)
-            return res
+        getPackage: async (root, args, context, info) => {
+            console.log('package => ', root, args, context, info)
         },
+        getMessage: async (root, args, context, info) => {
+            return "Darova"
+        },
+        getUser: async (root, args, context, info) => {
+            console.log("user", args)
+            return { name: "Roman", email: "mail" }
+        }
         /*getPosts: async (root, args, context) => {
             console.log('- getPosts args =>', args)
             let filter = {}
@@ -87,6 +93,28 @@ const resolvers = {
         /*userAdd: async(root, args, context, info) => {
             console.log('userAdd => ', root, args, context, info)
         },*/
+        setMessage: async (root, args, context, info) => {
+            console.log('set Message', args)
+        },
+        setUser: async (root, args, context, info) => {
+            console.log("Args =>", args)
+            return { id: "idasdasd" }
+            //return{ id:"!231as", name:"Roman",email:"romansEmail", password:"wasdads"}
+        },
+        setUserById: async (root, args, context, info) => {
+            console.log('user by uuid', args)
+            axios.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY')
+                .then(response => {
+                    console.log(response.data.url);
+                    console.log(response.data.explanation);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            return { uuid: args.uuid }
+        }
+        /*
+
         postAdd: async (root, args, context, info) => {
             console.log('- postAdd =>', args)
             const _id = ObjectId()
@@ -107,6 +135,7 @@ const resolvers = {
 
             return prepare(post)
         },
+        */
     },
 }
 

@@ -24,11 +24,17 @@ import NotFound from './components/NotFound';
 
 const customStyles = {
     content: {
+        display:"flex",
+        flex:1,
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
+        width:'500px',
+        height:'500px',
+        backgroundColor:"#7E4FDF",
+        borderRadius: '15px',
         transform: 'translate(-50%, -50%)'
     }
 };
