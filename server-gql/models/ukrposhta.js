@@ -11,7 +11,7 @@ const getApi = axios.create({
 
 
 async function getUkrPoshtaData(barcode) {
-    if (barcode) return {data: "rere"}
+    if (barcode) //return {data: "rere"}
         return await getApi.get(`/statuses?barcode=${barcode}&lang=en`)
             .then(({ data }) => {
                 data = data.map(i => {
