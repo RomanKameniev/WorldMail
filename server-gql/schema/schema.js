@@ -1,26 +1,24 @@
 const { ObjectId } = require('mongodb')
 const axios = require('axios');
-
-const prepare = o => {
-    if (!o) return o
-    if (o.email) delete o.email
-    if (o._id) {
-        o.id = o._id.toString()
-        delete o._id
-    }
-    return o
-}
+const postWrapper = require('./wrapper.js');
 
 const typeDefs = `
 type Query {
-    getPackage(id: ID!): [Package]
+    getPackage(id: ID!): Package
     getMessage: String
     getUser(id: ID!): User 
 }
 
 type Package {
     id: ID!
-    data: String
+    code: Int
+    data: [PackageData]
+}
+type PackageData {
+    country: String
+    status: String
+    date: String
+    barcode: String
 }
 
 type User {
@@ -64,7 +62,26 @@ const resolvers = {
 
     Query: {
         getPackage: async (root, args, context, info) => {
-            console.log('package => ', root, args, context, info)
+            let data
+            try {
+  //              console.log('args => ', args)
+                data = await new Promise((res, req) => {
+                    postWrapper.getPackage(args.id)
+                        .then(data => {
+//                            console.log('data in schema', data)
+                            if (data) return res(data)
+                            return req(data)
+                        })
+                })
+            } catch (error) {
+                console.log('error=>', err)
+            }
+            finally {
+                console.log('responce => ',data)
+                return { id: args.id, code: data[0].code, data: data[0].data }
+
+                //console.log('package => ', root, args, context, info)
+            }
         },
         getMessage: async (root, args, context, info) => {
             return "Darova"
@@ -73,18 +90,7 @@ const resolvers = {
             console.log("user", args)
             return { name: "Roman", email: "mail" }
         }
-        /*getPosts: async (root, args, context) => {
-            console.log('- getPosts args =>', args)
-            let filter = {}
-            if (args.after) filter._id = { $gt: ObjectId(args.after) };
 
-            const { total, items } = await fetchArrayCursor(context.post, filter, { limit: 10 });
-            console.log('- getPosts =>', items)
-            return {
-                total,
-                edges: items.map(prepare),
-            }
-        },*/
     },
 
 
@@ -113,29 +119,7 @@ const resolvers = {
                 });
             return { uuid: args.uuid }
         }
-        /*
-
-        postAdd: async (root, args, context, info) => {
-            console.log('- postAdd =>', args)
-            const _id = ObjectId()
-            const post = {
-                _id,
-                created: date(),
-                title: args.title,
-                msg: args.msg,
-                kind: args.kind,
-                tags: args.tags,
-                email: args.email,
-                likes: 0,
-            }
-
-            await context.post.insertOne(post)
-
-            delete post.email
-
-            return prepare(post)
-        },
-        */
+      
     },
 }
 
