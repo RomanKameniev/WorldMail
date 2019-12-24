@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'qrscanner.dart';
+import 'pages/home.dart';
+import 'pages/qrscanner.dart';
+import 'pages/packages.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,13 +17,13 @@ class MyApp extends StatelessWidget {
       home: MainPage(),
       initialRoute: '/',
       routes: <String, WidgetBuilder>{
-        '/packages': (BuildContext context) => Packages(title: "page A"),
+        '/packages': (BuildContext context) => Packages(),
         '/qrscan'  : (BuildContext context) => QRScan(title: "Scanning"),
       },
     );
   }
 }
-
+/*
 class Packages extends StatefulWidget {
   Packages({Key key, this.title}) : super(key: key);
   final String title;
@@ -41,6 +42,7 @@ class Packages extends StatefulWidget {
 }
 
 class _PackagesState extends State<Packages> {
+  
   //page_counter = 0;
   String page = "Main";
   void _changeScreen(String screen) {
@@ -68,3 +70,5 @@ class _PackagesState extends State<Packages> {
     );
   }
 }
+
+*/
